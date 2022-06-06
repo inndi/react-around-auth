@@ -1,0 +1,70 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+}
+
+.login__title {
+  margin: 0;
+  padding-top: 60px;
+}
+
+.login__input {
+  width: 358px;
+  background-color: transparent;
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  padding-bottom: 11px;
+  border: none;
+  border-bottom: 2px solid #CCC;
+
+}
+
+.login__input::placeholder {
+  color: #CCC;
+}
+
+.login__input_field_email {
+  margin-top: 50px;
+}
+
+.login__input_field_password {
+  margin-top: 30px;
+}
+
+.login__btn {
+  margin-top: 216px;
+  width: 358px;
+  height: 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  border: none;
+  border-radius: 2px;
+  transition: opacity 0.2s linear;
+}
+
+.login__register {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  padding-top: 15px;
+  padding-bottom: 80px;
+}
+
+.login__register-str {
+  margin: 0;
+}
+
+.login__register-link {
+  align-self: center;
+  white-space: pre;
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.2s linear;
+}
