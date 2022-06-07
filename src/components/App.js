@@ -14,6 +14,7 @@ import { AddPlacePopup } from "./AddPlacePopup";
 import { ConfirmationPopup } from "./ConfirmationPopup";
 import Login from "./Login";
 import Register from "./Register";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -186,8 +187,8 @@ function App() {
               <Login />
             </Route>
 
-            <Route path="/">
-              {!loggedIn && <Redirect to="/signin" />}
+            <ProtectedRoute path="/" loggedIn={loggedIn} >
+
               <Header />
               <Main
                 onEditProfileClick={handleEditProfileClick}
@@ -230,7 +231,9 @@ function App() {
                 card={selectedCard}
                 isOpen={isSelectedCard}
                 onClose={closeAllPopups} />
-            </Route>
+
+            </ProtectedRoute>
+
           </Switch>
 
         </div>

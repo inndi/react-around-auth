@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .auth__title {
   margin: 0;
   padding-top: 60px;
@@ -68,4 +74,19 @@
   text-decoration: none;
   color: white;
   transition: opacity 0.2s linear;
+}
+
+.auth__error-container {
+  max-height: 0;
+  width: 358px;
+  position: relative;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #f00;
+}
+
+.auth__input-error {
+  position: absolute;
+  left: 0;
 }
