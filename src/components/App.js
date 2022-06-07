@@ -13,6 +13,7 @@ import { EditAvatarPopup } from "./EditAvatarPopup";
 import { AddPlacePopup } from "./AddPlacePopup";
 import { ConfirmationPopup } from "./ConfirmationPopup";
 import Login from "./Login";
+import Register from "./Register";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -178,7 +179,7 @@ function App() {
           <Switch>
 
             <Route path="/signup">
-              {/* <Auth /> */}
+              <Register />
             </Route>
 
             <Route path="/signin">
