@@ -18,9 +18,9 @@ function Login(props) {
   //   setPassword(e.target.value);
   // }
 
-  function handleSubmit(e) {
+  function handleOnLogin(e) {
     e.preventDefault();
-
+    props.handleAuthSubmit(values.email, values.password);
   }
 
   return (
@@ -30,7 +30,7 @@ function Login(props) {
       </Header>
       <div className="auth">
         <h2 className="auth__title">Log in</h2>
-        <form className="auth__form" onSubmit={props.onSubmit}>
+        <form className="auth__form" onSubmit={handleOnLogin}>
           <input
             id="email-input"
             type="email"

@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import './styles/Auth.css';
-import * as auth from '../auth.js';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function Register(props) {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  const history = useHistory();
+
   const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
 
-  function handleSubmit(e) {
+  function handleOnRegister(e) {
     e.preventDefault();
-    if (values.email && values.password) {
-      auth.register(values.email, values.password)
-        .then((res) => {
-          if (res) {
-            history.push('/')
-          }
-        })
-    }
+    props.handleAuthSubmit(values.email, values.password);
   }
 
   return (
@@ -30,7 +20,7 @@ function Register(props) {
       </Header>
       <div className="auth">
         <h2 className="auth__title">Sign up</h2>
-        <form className="auth__form" onSubmit={handleSubmit}>
+        <form className="auth__form" onSubmit={handleOnRegister}>
           <input
             id="email-input"
             type="email"
