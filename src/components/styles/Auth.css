@@ -90,3 +90,34 @@
   position: absolute;
   left: 0;
 }
+
+@media screen and (max-width: 656px) {
+  .auth__title {
+    font-size: 20px;
+  }
+
+  .auth__input {
+    width: 260px;
+  }
+
+  .auth__input_field_email {
+    margin-top: 40px;
+  }
+
+  .auth__btn {
+    width: 260px;
+    height: 46px;
+    margin-top: 173px;
+  }
+
+  .auth__str-container {
+    padding-top: 20px;
+    padding-bottom: 77px;
+    font-size: 12px;
+  }
+
+  .auth__error-container {
+    width: 260px;
+    font-size: 10px;
+  }
+}
