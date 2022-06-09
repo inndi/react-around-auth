@@ -2,22 +2,15 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import './styles/Auth.css';
+import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function Register(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
-  function handleChangeUsername(e) {
-    setUsername(e.target.value);
-  }
+  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
 
-  function handleChangePassword(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleSubmit(e) {
+  function handleOnRegister(e) {
     e.preventDefault();
-
+    props.handleAuthSubmit(values.email, values.password);
   }
 
   return (
@@ -27,36 +20,33 @@ function Register(props) {
       </Header>
       <div className="auth">
         <h2 className="auth__title">Sign up</h2>
-        <form className="auth__form" onSubmit={props.onSubmit}>
+        <form className="auth__form" onSubmit={handleOnRegister}>
           <input
             id="email-input"
-            type="text"
-            name="profileEmail"
+            type="email"
+            name="email"
             placeholder="Email"
-            // onChange={handleChange}
-            // value={values.email || ""}
+            onChange={handleChange}
+            value={values.email || ""}
             autoComplete="off"
             className="auth__input auth__input_field_email"
-            minLength="2"
-            maxLength="40"
             required />
-          <div className="popup__error-container">
-            {/* <span className="popup__input-error name-input-error">{errors.profileName}</span> */}
+          <div className="auth__error-container">
+            <span className="auth__input-error email-input-error">{errors.email}</span>
           </div>
           <input
             id="password-input"
             type="password"
-            name="profilePassword"
+            name="password"
             placeholder="Password"
-            // onChange={handleChange}
-            // value={values.profilePassword || ""}
+            onChange={handleChange}
+            value={values.password || ""}
             autoComplete="off"
             className="auth__input auth__input_field_password"
-            // minLength="2"
-            // maxLength="200"
+            minLength="8"
             required />
-          <div className="popup__error-container">
-            {/* <span className="popup__input-error about-input-error">{errors.profileAbout}</span> */}
+          <div className="auth__error-container">
+            <span className="auth__input-error password-input-error">{errors.password}</span>
           </div>
           <button className="auth__btn hover-btn" type="submit">Sign up</button>
         </form>

@@ -9,3 +9,15 @@
   line-height: 1.22;
   transition: opacity 0.2s linear;
 }
+
+@media screen and (max-width: 921px) {
+  .header__link {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 656px) {
+  .header__link {
+    font-size: 14px;
+  }
+}
