@@ -1,0 +1,51 @@
+.header__container_active {
+  visibility: hidden;
+  cursor: auto;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header__logo-box {
+  border-top: 1px solid rgba(84, 84, 84, 0.7);
+  padding-top: 27px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header__close-btn {
+  margin-right: 21px;
+  visibility: hidden;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../../../images/plus.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  transform: rotate(45deg);
+  cursor: pointer;
+  top: -40px;
+  right: -40px;
+  padding: 0;
+  border: none;
+  transition: opacity 0.2s linear;
+}
+
+.header__close-btn_visible {
+  visibility: visible;
+}
+
+.header__container_active:hover {
+  opacity: 1;
+}
+
+.header__container_active .header__email {
+  visibility: visible;
+  margin: 12px 0 18px;
+}
+
+.header__container_active .header__button {
+  visibility: visible;
+  margin-bottom: 40px;
+}

@@ -11,3 +11,9 @@
   padding-left: 24px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 656px) {
+  .header__button {
+    visibility: hidden;
+  }
+}

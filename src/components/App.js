@@ -27,6 +27,7 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [isAuthPopupOpen, setIsAuthPopupOpen] = useState(true);
   const [isSelectedCard, setIsSelectedCard] = useState(false);
+  const [isNavActive, setIsNavActive] = useState(false);///////////////
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -44,6 +45,7 @@ function App() {
       .then((res) => {
         if (res.status !== 400) {
           setIsRegistered('true');
+          setEmail(email);
           setLoggedIn(true);
           history.push('/')
         } else {
@@ -54,7 +56,6 @@ function App() {
         console.log(err)
       });
     setIsAuthPopupOpen(true);
-    // setIsRegistered('');
   }
 
   function handleAuthorizeSubmit(email, password) {
@@ -64,6 +65,7 @@ function App() {
     auth.authorize(email, password)
       .then((data) => {
         if (data.token) {
+          setEmail(email);
           setLoggedIn(true);
           history.push('/');
         }
@@ -116,6 +118,7 @@ function App() {
     setIsDeleteCardPopupOpen(false);
     setIsSelectedCard(false);
     setIsAuthPopupOpen(false);
+    setIsNavActive(false);
     setIsRegistered('');
   }
 
@@ -240,6 +243,10 @@ function App() {
     history.push('/signin');
   }
 
+  function handlerNav() {
+    setIsNavActive(true);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -266,8 +273,8 @@ function App() {
             <ProtectedRoute path="/" loggedIn={loggedIn} >
 
 
-              <Header>
-                <div className="header__container">
+              <Header isNavActive={isNavActive} onClose={closeAllPopups}>
+                <div className={`header__container ${isNavActive ? 'header__container_active' : ''}`} onClick={handlerNav}>
                   <p className="header__email">{email}</p>
                   <button className="header__button hover-btn" onClick={handleOnSignOut}>Log out</button>
                 </div>
