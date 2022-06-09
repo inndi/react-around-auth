@@ -27,8 +27,7 @@ export function EditProfilePopup(props) {
       isOpen={props.isOpen}
       isValid={isValid}
       onClose={props.onClose}
-      onSubmit={handleSubmit}
-      buttonText={props.buttonText}>
+      onSubmit={handleSubmit}>
       <input
         id="name-input"
         type="text"
@@ -59,6 +58,7 @@ export function EditProfilePopup(props) {
       <div className="popup__error-container">
         <span className="popup__input-error about-input-error">{errors.profileAbout}</span>
       </div>
+      <button className={`popup__save-btn ${!isValid ? 'popup__save-btn_disabled' : ''}`} type="submit">{props.buttonText}</button>
     </PopupWithForm>
   )
 }

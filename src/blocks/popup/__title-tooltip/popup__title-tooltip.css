@@ -1,0 +1,11 @@
+.popup__title-tooltip {
+  text-align: center;
+  padding: 124px 0 23px;
+  min-width: 280px
+}
+
+@media screen and (max-width: 632px) {
+  .popup__title-tooltip {
+    font-size: 20px;
+  }
+}

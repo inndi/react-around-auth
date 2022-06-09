@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 import '../index.css';
+import unsuccessReg from '../images/unsuccessReg.svg';
+import successReg from '../images/successReg.svg';
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -14,19 +16,79 @@ import { AddPlacePopup } from "./AddPlacePopup";
 import { ConfirmationPopup } from "./ConfirmationPopup";
 import Login from "./Login";
 import Register from "./Register";
+import ProtectedRoute from "./ProtectedRoute";
+import InfoTooltip from "./InfoTooltip";
+import * as auth from '../utils/auth.js';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
+  const [isAuthPopupOpen, setIsAuthPopupOpen] = useState(true);
   const [isSelectedCard, setIsSelectedCard] = useState(false);
+  const [isNavActive, setIsNavActive] = useState(false);///////////////
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [buttonText, setButtonText] = useState('');
 
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const [isRegistered, setIsRegistered] = useState('');//////////////////////////////////
+  const history = useHistory();
+
+  const [email, setEmail] = useState('');
+
+  function handleRegisterSubmit(email, password) {
+    auth.register(email, password)
+      .then((res) => {
+        if (res.status !== 400) {
+          setIsRegistered('true');
+          setEmail(email);
+          setLoggedIn(true);
+          history.push('/')
+        } else {
+          setIsRegistered('false');
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+    setIsAuthPopupOpen(true);
+  }
+
+  function handleAuthorizeSubmit(email, password) {
+    if (!email || !password) {
+      return;
+    }
+    auth.authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          setEmail(email);
+          setLoggedIn(true);
+          history.push('/');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth.getContent(jwt)
+        .then((res) => {
+          setEmail(res.data.email);
+          setLoggedIn(true);
+          history.push('/');
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  useEffect(() => {
+    tokenCheck();
+  }, [])
 
   function handleEditProfileClick() {
     setButtonText('Save');
@@ -55,6 +117,9 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsDeleteCardPopupOpen(false);
     setIsSelectedCard(false);
+    setIsAuthPopupOpen(false);
+    setIsNavActive(false);
+    setIsRegistered('');
   }
 
   useEffect(() => {
@@ -172,6 +237,16 @@ function App() {
       });
   }
 
+  function handleOnSignOut() {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+    history.push('/signin');
+  }
+
+  function handlerNav() {
+    setIsNavActive(true);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -179,16 +254,31 @@ function App() {
           <Switch>
 
             <Route path="/signup">
-              <Register />
+              <Register handleAuthSubmit={handleRegisterSubmit} />
+              {(isRegistered === 'false') && <InfoTooltip
+                isOpen={isAuthPopupOpen}
+                onClose={closeAllPopups}
+                imgSrc={unsuccessReg}
+                title='Oops, something went wrong! Please try again.' />}
+
+
             </Route>
 
             <Route path="/signin">
-              <Login />
+              <Login handleAuthSubmit={handleAuthorizeSubmit} />
+
             </Route>
 
-            <Route path="/">
-              {!loggedIn && <Redirect to="/signin" />}
-              <Header />
+
+            <ProtectedRoute path="/" loggedIn={loggedIn} >
+
+
+              <Header isNavActive={isNavActive} onClose={closeAllPopups}>
+                <div className={`header__container ${isNavActive ? 'header__container_active' : ''}`} onClick={handlerNav}>
+                  <p className="header__email">{email}</p>
+                  <button className="header__button hover-btn" onClick={handleOnSignOut}>Log out</button>
+                </div>
+              </Header>
               <Main
                 onEditProfileClick={handleEditProfileClick}
                 onEditAvatarClick={handleEditAvatarClick}
@@ -199,6 +289,12 @@ function App() {
                 onCardLike={handleCardLike}
               />
               <Footer />
+
+              {(isRegistered === 'true') && <InfoTooltip
+                isOpen={isAuthPopupOpen}
+                onClose={closeAllPopups}
+                imgSrc={successReg}
+                title='Success! You have now been registered.' />}
 
               <EditProfilePopup
                 isOpen={isEditProfilePopupOpen}
@@ -230,7 +326,9 @@ function App() {
                 card={selectedCard}
                 isOpen={isSelectedCard}
                 onClose={closeAllPopups} />
-            </Route>
+
+            </ProtectedRoute>
+
           </Switch>
 
         </div>
