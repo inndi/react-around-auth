@@ -5,18 +5,8 @@ import './styles/Auth.css';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function Login(props) {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
 
   const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
-
-  // function handleChangeUsername(e) {
-  //   setUsername(e.target.value);
-  // }
-
-  // function handleChangePassword(e) {
-  //   setPassword(e.target.value);
-  // }
 
   function handleOnLogin(e) {
     e.preventDefault();
@@ -67,8 +57,6 @@ function Login(props) {
       </div>
     </div>
   )
-
-
 }
 
 export default Login; 

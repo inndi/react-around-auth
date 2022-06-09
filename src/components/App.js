@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 import '../index.css';
+import unsuccessReg from '../images/unsuccessReg.svg';
+import successReg from '../images/successReg.svg';
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -249,7 +251,8 @@ function App() {
               {(isRegistered === 'false') && <InfoTooltip
                 isOpen={isAuthPopupOpen}
                 onClose={closeAllPopups}
-                title='Unsuccess!' />}
+                imgSrc={unsuccessReg}
+                title='Oops, something went wrong! Please try again.' />}
 
 
             </Route>
@@ -283,6 +286,7 @@ function App() {
               {(isRegistered === 'true') && <InfoTooltip
                 isOpen={isAuthPopupOpen}
                 onClose={closeAllPopups}
+                imgSrc={successReg}
                 title='Success! You have now been registered.' />}
 
               <EditProfilePopup

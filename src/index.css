@@ -32,6 +32,8 @@
 @import url('./blocks/popup/__save-btn/popup__save-btn.css');
 @import url('./blocks/popup/__save-btn/_disabled/popup__save-btn_disabled.css');
 @import url('./blocks/popup/__close-btn/popup__close-btn.css');
+@import url('./blocks/popup/__img/popup__img.css');
+@import url('./blocks/popup/__title-tooltip/popup__title-tooltip.css');
 @import url('./blocks/hover-btn/hover-btn.css');
 @import url('./blocks/cards/__list/cards__list.css');
 @import url('./blocks/card/card.css');
