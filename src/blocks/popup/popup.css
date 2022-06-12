@@ -4,7 +4,6 @@
   transition: all .3s linear;
 }
 
-
 .popup::before {
   content: ' ';
   display: block;

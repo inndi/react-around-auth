@@ -126,19 +126,6 @@ function App() {
     setIsRegistered('');
   }
 
-  useEffect(() => {
-    const closeByEscape = (e) => {
-      if (e.key === 'Escape') {
-        closeAllPopups();
-      }
-    }
-
-
-    document.addEventListener('keydown', closeByEscape)
-
-    return () => document.removeEventListener('keydown', closeByEscape)
-  }, [])
-
   function handleCardClick(card) {
     setIsSelectedCard(true);
     setSelectedCard(card);
@@ -248,7 +235,9 @@ function App() {
   }
 
   function handlerNav() {
-    setIsNavActive(true);
+    if (window.innerWidth < 657) {
+      setIsNavActive(true);
+    }
   }
 
   return (
@@ -270,11 +259,11 @@ function App() {
               <Login handleAuthSubmit={handleAuthorizeSubmit} />
             </Route>
 
-
             <ProtectedRoute path="/" loggedIn={loggedIn} >
 
               <Header isNavActive={isNavActive} onClose={closeAllPopups}>
-                <div className={`header__container ${isNavActive ? 'header__container_active' : ''}`} onClick={handlerNav}>
+                <div className={`header__container ${isNavActive ? 'header__container_active' : ''}`}
+                  onClick={handlerNav}>
                   <p className="header__email">{email}</p>
                   <button className="header__button hover-btn" onClick={handleOnSignOut}>Log out</button>
                 </div>
@@ -334,7 +323,7 @@ function App() {
 
         </div>
       </div>
-    </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider >
   );
 }
 

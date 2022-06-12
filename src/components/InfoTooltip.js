@@ -1,15 +1,13 @@
 import React from 'react';
+import Popup from './Popup';
 
 function InfoTooltip(props) {
 
   return (
-    <div className={`popup popup_tooltip ${props.isOpen ? 'popup_opened' : ''}`}>
-      <div className="popup__container">
-        <img className="popup__img" src={props.imgSrc}></img>
-        <h2 className="popup__title popup__title-tooltip">{props.title}</h2>
-        <button className="popup__close-btn hover-btn" onClick={props.onClose} type="button"></button>
-      </div>
-    </div>
+    <Popup isOpen={props.isOpen} onClose={props.onClose}>
+      <img className="popup__img" src={props.imgSrc}></img>
+      <h2 className="popup__title popup__title-tooltip">{props.title}</h2>
+    </Popup>
   )
 
 }
