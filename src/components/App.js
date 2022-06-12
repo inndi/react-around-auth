@@ -27,7 +27,7 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [isAuthPopupOpen, setIsAuthPopupOpen] = useState(true);
   const [isSelectedCard, setIsSelectedCard] = useState(false);
-  const [isNavActive, setIsNavActive] = useState(false);///////////////
+  const [isNavActive, setIsNavActive] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -35,7 +35,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [isRegistered, setIsRegistered] = useState('');//////////////////////////////////
+  const [isRegistered, setIsRegistered] = useState('');
   const history = useHistory();
 
   const [email, setEmail] = useState('');
@@ -54,8 +54,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err)
+      })
+      .finally(() => {
+        setIsAuthPopupOpen(true);
       });
-    setIsAuthPopupOpen(true);
   }
 
   function handleAuthorizeSubmit(email, password) {
