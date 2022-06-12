@@ -1,23 +1,6 @@
 .popup__img {
-  position: absolute;
-  top: 60px;
-  left: 35%;
-}
-
-@media screen and (max-width: 746px) {
-  .popup__img {
-    left: 33%;
-  }
-}
-
-@media screen and (max-width: 746px) {
-  .popup__img {
-    left: 32%;
-  }
-}
-
-@media screen and (max-width: 632px) {
-  .popup__img {
-    left: 29%;
-  }
+  height: 120px;
+  width: 120px;
+  align-self: center;
+  margin-top: 26px
 }

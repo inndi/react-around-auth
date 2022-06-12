@@ -24,7 +24,8 @@ export function EditAvatarPopup(props) {
       isOpen={props.isOpen}
       isValid={isValid}
       onClose={props.onClose}
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+      buttonText={props.buttonText}>
       <input
         onChange={handleChange}
         value={values.avatarLink || ""}
@@ -38,7 +39,6 @@ export function EditAvatarPopup(props) {
       <div className="popup__error-container">
         <span className="popup__input-error avaLink-input-error">{errors.avatarLink}</span>
       </div>
-      <button className={`popup__save-btn ${!isValid ? 'popup__save-btn_disabled' : ''}`} type="submit">{props.buttonText}</button>
     </PopupWithForm>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import '../index.css';
 import unsuccessReg from '../images/unsuccessReg.svg';
@@ -25,7 +25,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
-  const [isAuthPopupOpen, setIsAuthPopupOpen] = useState(true);
+  const [isAuthPopupOpen, setIsAuthPopupOpen] = useState(false);
   const [isSelectedCard, setIsSelectedCard] = useState(false);
   const [isNavActive, setIsNavActive] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
@@ -53,7 +53,8 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(err)
+        setIsRegistered('false');
+        console.log(err);
       })
       .finally(() => {
         setIsAuthPopupOpen(true);
@@ -69,6 +70,7 @@ function App() {
         if (data.token) {
           setEmail(email);
           setLoggedIn(true);
+          setIsNavActive(false);
           history.push('/');
         }
       })
@@ -262,18 +264,14 @@ function App() {
                 onClose={closeAllPopups}
                 imgSrc={unsuccessReg}
                 title='Oops, something went wrong! Please try again.' />}
-
-
             </Route>
 
             <Route path="/signin">
               <Login handleAuthSubmit={handleAuthorizeSubmit} />
-
             </Route>
 
 
             <ProtectedRoute path="/" loggedIn={loggedIn} >
-
 
               <Header isNavActive={isNavActive} onClose={closeAllPopups}>
                 <div className={`header__container ${isNavActive ? 'header__container_active' : ''}`} onClick={handlerNav}>
@@ -281,6 +279,7 @@ function App() {
                   <button className="header__button hover-btn" onClick={handleOnSignOut}>Log out</button>
                 </div>
               </Header>
+
               <Main
                 onEditProfileClick={handleEditProfileClick}
                 onEditAvatarClick={handleEditAvatarClick}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 function PopupWithForm(props) {
 
@@ -11,6 +11,7 @@ function PopupWithForm(props) {
           name={`register-${props.name}`}
           onSubmit={props.onSubmit}>
           {props.children}
+          <button className={`popup__save-btn ${!props.isValid ? 'popup__save-btn_disabled' : ''}`} type="submit">{props.buttonText}</button>
         </form>
         <button className="popup__close-btn hover-btn" onClick={props.onClose} type="button"></button>
       </div>
