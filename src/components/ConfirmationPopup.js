@@ -16,8 +16,8 @@ export function ConfirmationPopup(props) {
       isOpen={props.isOpen}
       onSubmit={handleSubmit}
       isValid={true}
+      buttonText='Yes'
     >
-      <button className="popup__save-btn" type="submit">Yes</button>
     </ PopupWithForm>
   )
 }
