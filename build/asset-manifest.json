@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/around-react-auth/static/css/main.9cf78163.css",
+    "main.css": "/around-react-auth/static/css/main.35219955.css",
     "main.js": "/around-react-auth/static/js/main.9f3332fb.js",
     "static/js/787.1c78f32b.chunk.js": "/around-react-auth/static/js/787.1c78f32b.chunk.js",
     "static/media/Inter-Medium.woff": "/around-react-auth/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
@@ -20,12 +20,12 @@
     "static/media/edit.svg": "/around-react-auth/static/media/edit.8667ac4a523e8fc42e59.svg",
     "static/media/plus.svg": "/around-react-auth/static/media/plus.d86bb2edc2f6eadb96b7.svg",
     "static/media/small_plus.svg": "/around-react-auth/static/media/small_plus.54b1426515811a15ebaf.svg",
-    "main.9cf78163.css.map": "/around-react-auth/static/css/main.9cf78163.css.map",
+    "main.35219955.css.map": "/around-react-auth/static/css/main.35219955.css.map",
     "main.9f3332fb.js.map": "/around-react-auth/static/js/main.9f3332fb.js.map",
     "787.1c78f32b.chunk.js.map": "/around-react-auth/static/js/787.1c78f32b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9cf78163.css",
+    "static/css/main.35219955.css",
     "static/js/main.9f3332fb.js"
   ]
 }
