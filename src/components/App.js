@@ -47,7 +47,7 @@ function App() {
           setIsRegistered('true');
           setEmail(email);
           setLoggedIn(true);
-          history.push('/')
+          history.push('/users/me')
         } else {
           setIsRegistered('false');
         }
@@ -71,7 +71,7 @@ function App() {
           setEmail(email);
           setLoggedIn(true);
           setIsNavActive(false);
-          history.push('/');
+          history.push('/users/me');
         }
       })
       .catch((err) => console.log(err));
@@ -84,7 +84,7 @@ function App() {
         .then((res) => {
           setEmail(res.data.email);
           setLoggedIn(true);
-          history.push('/');
+          history.push('/users/me');
         })
         .catch((err) => console.log(err));
     }
@@ -259,7 +259,7 @@ function App() {
               <Login handleAuthSubmit={handleAuthorizeSubmit} />
             </Route>
 
-            <ProtectedRoute path="/" loggedIn={loggedIn} >
+            <ProtectedRoute path="/users/me" loggedIn={loggedIn} >
 
               <Header isNavActive={isNavActive} onClose={closeAllPopups}>
                 <div className={`header__container ${isNavActive ? 'header__container_active' : ''}`}

@@ -21,8 +21,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "node app.js"
-    // "deploy": "npm run build && scp -r ./build/* inndi.spivakova@around-the-us.students.nomoreparties.sbs:/home/inndi.spivakova/frontend"
+    "start": "node app.js",
+    "deploy": "npm run build && scp -r ./build/* inndi.spivakova@around-the-us.students.nomoreparties.sbs:/home/inndi.spivakova/react-around-api-full/around-frontend"
   },
   "eslintConfig": {
     "extends": [
