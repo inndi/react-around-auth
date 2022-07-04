@@ -5,6 +5,7 @@ class Api {
   }
 
   _checkResponse(res) {
+    console.log(res);
     if (res.ok) {
       return res.json();
     }
@@ -85,10 +86,12 @@ class Api {
   }
 }
 
+const token = localStorage.getItem('jwt');
 const api = new Api({
-  baseUrl: "https://around-the-us.students.nomoreparties.sbs",
+  baseUrl: 'http://localhost:3003',
+  // baseUrl: "https://api.around-the-us.students.nomoreparties.sbs",
   headers: {
-    authorization: "2f92e6f8-d3bf-4f0b-b7c9-ecb844a65d7b",
+    "Authorization": `Bearer ${token}`,
     "Content-Type": "application/json"
   }
 });

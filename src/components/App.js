@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
 import '../index.css';
 import unsuccessReg from '../images/unsuccessReg.svg';
@@ -33,10 +33,13 @@ function App() {
   const [cards, setCards] = useState([]);
   const [buttonText, setButtonText] = useState('');
 
+
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [isRegistered, setIsRegistered] = useState('');
   const history = useHistory();
+  const [token, setToken] = useState(localStorage.getItem('jwt'));/////////////////////////////////
+  // let token;
 
   const [email, setEmail] = useState('');
 
@@ -45,9 +48,7 @@ function App() {
       .then((res) => {
         if (res.status !== 400) {
           setIsRegistered('true');
-          setEmail(email);
-          setLoggedIn(true);
-          history.push('/users/me')
+          handleAuthorizeSubmit(email, password);
         } else {
           setIsRegistered('false');
         }
@@ -69,9 +70,15 @@ function App() {
       .then((data) => {
         if (data.token) {
           setEmail(email);
-          setLoggedIn(true);
           setIsNavActive(false);
-          history.push('/users/me');
+          tokenCheck();
+
+          // history.push('/users/me');
+          // getInitialCards();// ///////////
+
+          setToken(localStorage.getItem('jwt'));/////////////////////////////////////
+          // // token = data.token;
+          console.log(token);///////////////////////////////
         }
       })
       .catch((err) => console.log(err));
@@ -80,14 +87,26 @@ function App() {
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
+      console.log(jwt);
       auth.getContent(jwt)
         .then((res) => {
           setEmail(res.data.email);
+          setCurrentUser(res.data);
           setLoggedIn(true);
           history.push('/users/me');
         })
         .catch((err) => console.log(err));
+
+      auth.getCards(jwt)
+        .then((res) => {
+          setCards(res);
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
+
   }
 
   useEffect(() => {
@@ -135,7 +154,7 @@ function App() {
     setButtonText('Saving...');
     api.patchProfileData(userInfo)
       .then((user) => {
-        setCurrentUser(user);
+        setCurrentUser(user.data);
       })
       .then(() => {
         closeAllPopups();
@@ -152,7 +171,7 @@ function App() {
     setButtonText('Saving...');
     api.patchAvatar(fieldValue)
       .then((user) => {
-        setCurrentUser(user);
+        setCurrentUser(user.data);
 
       })
       .then(() => {
@@ -166,18 +185,19 @@ function App() {
       });
   }
 
-  useEffect(() => {
-    api.getUserInfo()
-      .then((user) => {
-        setCurrentUser(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, [])
+  // useEffect(() => {
+  //   api.getUserInfo()
+  //     .then((user) => {
+  //       console.log(user);
+  //       setCurrentUser(user.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }, [])//////////////////////////////////////////////////////////////
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(user => user._id === currentUser._id);
+    const isLiked = card.likes.some(user => user === currentUser._id);
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
@@ -201,21 +221,36 @@ function App() {
       });
   }
 
-  useEffect(() => {
-    api.getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // function getInitialCards() {
+  //   api.getInitialCards()
+  //     .then((res) => {
+  //       console.log('cards success');
+  //       setCards(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // useEffect(() => {
+  //   getInitialCards();
+  // }, []);
+
+  // useEffect(() => {
+  //   api.getInitialCards()
+  //     .then((res) => {
+  //       setCards(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   function handleAddPlaceSubmit(card) {
     setButtonText('Creating...');
     api.postNewCardData(card)
       .then((card) => {
-        setCards([card, ...cards]);
+        setCards([...cards, card.data]);
       })
       .then(() => {
         closeAllPopups();
@@ -231,6 +266,7 @@ function App() {
   function handleOnSignOut() {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
+    setCurrentUser({});
     history.push('/signin');
   }
 
@@ -318,6 +354,7 @@ function App() {
                 onClose={closeAllPopups} />
 
             </ProtectedRoute>
+            <ProtectedRoute path="/" loggedIn={loggedIn} />
 
           </Switch>
 

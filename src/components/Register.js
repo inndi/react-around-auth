@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Header from './Header';
 import './styles/Auth.css';
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
@@ -61,4 +61,4 @@ function Register(props) {
 
 }
 
-export default Register; 
+export default withRouter(Register); 
