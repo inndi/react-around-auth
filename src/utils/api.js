@@ -2,6 +2,7 @@ class Api {
   constructor(fetchData) {
     this._baseUrl = fetchData.baseUrl;
     this._headers = fetchData.headers;
+    this._token = undefined;
   }
 
   _checkResponse(res) {
@@ -10,6 +11,16 @@ class Api {
       return res.json();
     }
     return Promise.reject(`Error: ${res.status}`);
+  }
+
+  setToken(token) {
+    if (!token || this._token === token) return;
+
+    this._headers = {
+      ...this._headers,
+      "Authorization": `Bearer ${token}`,
+    };
+    this._token = token;
   }
 
   getInitialCards() {
@@ -91,7 +102,6 @@ const api = new Api({
   baseUrl: 'http://localhost:3003',
   // baseUrl: "https://api.around-the-us.students.nomoreparties.sbs",
   headers: {
-    "Authorization": `Bearer ${token}`,
     "Content-Type": "application/json"
   }
 });

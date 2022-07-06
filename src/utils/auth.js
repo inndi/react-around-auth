@@ -2,7 +2,6 @@ export const BASE_URL = 'http://localhost:3003';
 // export const BASE_URL = 'https://api.around-the-us.students.nomoreparties.sbs';
 
 function checkResponse(res) {
-  console.log(res);
   if (res.ok) {
     return res.json();
   }
