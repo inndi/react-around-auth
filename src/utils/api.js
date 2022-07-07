@@ -97,10 +97,8 @@ class Api {
   }
 }
 
-const token = localStorage.getItem('jwt');
 const api = new Api({
-  baseUrl: 'http://localhost:3003',
-  // baseUrl: "https://api.around-the-us.students.nomoreparties.sbs",
+  baseUrl: "https://api.around-inna-spivakova.students.nomoredomainssbs.ru",
   headers: {
     "Content-Type": "application/json"
   }

@@ -1,7 +1,7 @@
-export const BASE_URL = 'http://localhost:3003';
-// export const BASE_URL = 'https://api.around-the-us.students.nomoreparties.sbs';
+export const BASE_URL = 'https://api.around-inna-spivakova.students.nomoredomainssbs.ru';
 
 function checkResponse(res) {
+  console.log(res)
   if (res.ok) {
     return res.json();
   }
@@ -10,7 +10,7 @@ function checkResponse(res) {
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
-    method: "POST",
+    method: 'POST',
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json"

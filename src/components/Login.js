@@ -6,7 +6,7 @@ import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function Login(props) {
 
-  const { values, handleChange, errors, isValid, setValues, resetForm } = useFormAndValidation();
+  const { values, handleChange, errors } = useFormAndValidation();
 
   function handleOnLogin(e) {
     e.preventDefault();
