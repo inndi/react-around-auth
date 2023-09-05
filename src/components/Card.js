@@ -27,6 +27,7 @@ function Card(props) {
     props.onCardClick(props.card);
   }
 
+
   return (
     <li className="card">
       <div

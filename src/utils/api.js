@@ -1,3 +1,5 @@
+import { API_URL } from "../constants/constants";
+
 class Api {
   constructor(fetchData) {
     this._baseUrl = fetchData.baseUrl;
@@ -6,7 +8,6 @@ class Api {
   }
 
   _checkResponse(res) {
-    console.log(res);
     if (res.ok) {
       return res.json();
     }
@@ -98,7 +99,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://api.around-inna-spivakova.students.nomoredomainssbs.ru",
+  baseUrl: API_URL,
   headers: {
     "Content-Type": "application/json"
   }
