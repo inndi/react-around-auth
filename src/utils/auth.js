@@ -1,7 +1,6 @@
-export const BASE_URL = 'https://api.around-inna-spivakova.students.nomoredomainssbs.ru';
+import { API_URL } from "../constants/constants";
 
 function checkResponse(res) {
-  console.log(res)
   if (res.ok) {
     return res.json();
   }
@@ -9,7 +8,7 @@ function checkResponse(res) {
 }
 
 export const register = (email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${API_URL}/signup`, {
     method: 'POST',
     headers: {
       "Accept": "application/json",
@@ -23,7 +22,7 @@ export const register = (email, password) => {
 }
 
 export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${API_URL}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -42,7 +41,7 @@ export const authorize = (email, password) => {
 }
 
 export const getContent = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${API_URL}/users/me`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
@@ -54,7 +53,7 @@ export const getContent = (token) => {
 }
 
 export const getCards = (token) => {
-  return fetch(`${BASE_URL}/cards`, {
+  return fetch(`${API_URL}/cards`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
